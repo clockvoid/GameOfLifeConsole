@@ -58,7 +58,7 @@ class game_of_life {
 		game_of_life(std::vector<std::vector<int>> arg0, int size, callback arg1);
 		void run();
 		void console_clear();
-		void draw_blocks();
+		void drow_blocks();
 };
 
 game_of_life::game_of_life(std::vector<std::vector<int>> arg0, int size, callback arg1) {
@@ -71,7 +71,7 @@ void game_of_life::console_clear() {
 	std::cout << "\e[;H\e[2J"; // clear screen
 }
 
-void game_of_life::draw_blocks() {
+void game_of_life::drow_blocks() {
 	for (int i = 0; i < this->size; i++) {
 		for (int j = 0; j < this->size; j++) {
 			std::cout << ((this->field[i][j] == 1) ? "\x1b[41m  " : "\x1b[49m  ");
@@ -84,7 +84,7 @@ void game_of_life::draw_blocks() {
 void game_of_life::run() {
 	while (true) {
 		this->console_clear();
-		this->draw_blocks();
+		this->drow_blocks();
 		std::chrono::milliseconds dura( 500 ); // 1000 milli second
 		std::this_thread::sleep_for( dura ); // wait
 		this->field = this->func(this->field, this->size);
@@ -109,7 +109,7 @@ std::vector<std::vector<int>> initialField(int size) {
 int main(int argc, char const* argv[])
 {
 	callback func;
-	int size = 40;
+	int size = 60;
 	std::vector<std::vector<int>> vec = initialField(size);
 	game_of_life test(vec, size, func);
 	test.run();
